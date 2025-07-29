@@ -1,0 +1,50 @@
+@page "/edit/{Id:guid}"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using MovieLibrary.Client.Models
+@using Microsoft.AspNetCore.Components.Forms
+@code {
+    [Parameter] public Guid Id { get; set; }
+    private Movie? movie;
+
+    protected override async Task OnInitializedAsync()
+    {
+        movie = await Http.GetFromJsonAsync<Movie>($"api/movies/{Id}");
+    }
+
+    private async Task UpdateMovie()
+    {
+        await Http.PutAsJsonAsync($"api/movies/{Id}", movie);
+        Navigation.NavigateTo("/");
+    }
+}
+
+@if (movie is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h3>Edit Movie</h3>
+    <EditForm Model="@movie" OnValidSubmit="UpdateMovie">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <InputText @bind-Value="movie.Name" class="form-control mb-2" />
+        <InputText @bind-Value="movie.Genre" class="form-control mb-2" />
+        <InputText @bind-Value="ActorString"  class="form-control mb-2" />
+        <InputTextArea @bind-Value="movie.Description" class="form-control mb-2" />
+        <InputDate @bind-Value="movie.ReleaseDate" class="form-control mb-2" />
+        <InputText @bind-Value="movie.PosterUrl" class="form-control mb-2" />
+        <button class="btn btn-primary">Update</button>
+    </EditForm>
+}
+
+@code {
+    private string ActorString
+    {
+        get => string.Join(", ", movie.Actors);
+        set => movie.Actors = value
+            .Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+    }
+}

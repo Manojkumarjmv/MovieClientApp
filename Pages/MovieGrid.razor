@@ -1,0 +1,61 @@
+@page "/"
+@inject HttpClient Http
+@using MovieLibrary.Client.Models
+@inject MovieLibrary.Client.Services.MovieService movieService
+
+<h3>🎬 Movie Library</h3>
+
+<input type="text" @bind="searchTerm" @bind:event="oninput" class="form-control mb-3" placeholder="Search by name, genre, actor..." />
+
+<div class="row">
+    @foreach (var movie in FilteredMovies)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="@movie.PosterUrl" class="card-img-top" alt="@movie.Name" />
+                <div class="card-body">
+                    <h5>@movie.Name</h5>
+                    <p>@movie.Description</p>
+                    <p><strong>Genre:</strong> @movie.Genre</p>
+                    <p><strong>Actors:</strong> @movie.Actors</p>
+                    <p><strong>Released:</strong> @movie.ReleaseDate.ToShortDateString()</p>
+                    <a href="/edit/@movie.Id" class="btn btn-outline-primary me-2">Edit</a>
+                    <button class="btn btn-outline-danger" @onclick="() => DeleteMovie(movie.Id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Movie> movies = new();
+    private string searchTerm = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        movies = await movieService.GetMoviesAsync();
+        if (movies == null)
+        {
+            movies = new List<Movie>();
+        }
+        else
+        {
+            movies = movies.OrderByDescending(m => m.ReleaseDate).ToList();
+        }
+    }
+
+     private List<Movie> FilteredMovies =>
+       string.IsNullOrWhiteSpace(searchTerm)
+        ? movies
+        : movies
+            .Where(m =>
+                m.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                m.Genre.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                m.Actors.Any(actor => actor.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
+            .ToList(); 
+    private async Task DeleteMovie(Guid id)
+    {
+        await Http.DeleteAsync($"api/movies/{id}");
+        movies = movies.Where(m => m.Id != id).ToList();
+    }
+}

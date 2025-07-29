@@ -1,0 +1,39 @@
+@page "/add"
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@using MovieLibrary.Client.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+<h3>Add Movie</h3>
+
+<EditForm Model="@movie" OnValidSubmit="@HandleAddMovie">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <InputText @bind-value="movie.Name" class="form-control mb-2" placeholder="Movie Name" />
+    <InputText @bind-value="movie.Genre" class="form-control mb-2" placeholder="Genre" />
+    <InputText @bind-value="ActorString" class="form-control mb-2" placeholder="Actors" />
+    <InputTextArea @bind-value="movie.Description" class="form-control mb-2" placeholder="Description" />
+    <InputDate @bind-value="movie.ReleaseDate" class="form-control mb-2" />
+    <InputText @bind-value="movie.PosterUrl" class="form-control mb-2" placeholder="Poster URL" />
+    <button class="btn btn-success">Add Movie</button>
+</EditForm>
+
+@code {
+    private Movie movie = new();
+
+    private async Task HandleAddMovie()
+    {
+        await Http.PostAsJsonAsync("api/movies", movie);
+        Navigation.NavigateTo("/");
+    }
+}
+
+@code {
+    private string ActorString
+    {
+        get => string.Join(", ", movie.Actors);
+        set => movie.Actors = value
+            .Split(",", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+    }
+}
