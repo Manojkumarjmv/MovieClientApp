@@ -79,3 +79,4 @@ C:\Users\Anuuu\Source\MovieLibrary.Client\obj\Debug\net9.0\refint\MovieLibraryWe
 C:\Users\Anuuu\Source\MovieLibrary.Client\obj\Debug\net9.0\MovieLibraryWebApp.pdb
 C:\Users\Anuuu\Source\MovieLibrary.Client\obj\Debug\net9.0\MovieLibraryWebApp.genruntimeconfig.cache
 C:\Users\Anuuu\Source\MovieLibrary.Client\obj\Debug\net9.0\ref\MovieLibraryWebApp.dll
+C:\Users\Anuuu\Source\MovieLibrary.Client\obj\Debug\net9.0\MovieLibraryWebApp.sourcelink.json
