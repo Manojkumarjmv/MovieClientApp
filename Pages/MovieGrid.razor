@@ -17,7 +17,7 @@
                     <h5>@movie.Name</h5>
                     <p>@movie.Description</p>
                     <p><strong>Genre:</strong> @movie.Genre</p>
-                    <p><strong>Actors:</strong> @movie.Actors</p>
+                    <p><strong>Actors:</strong> @string.Join(", ", movie.Actors)</p>
                     <p><strong>Released:</strong> @movie.ReleaseDate.ToShortDateString()</p>
                     <a href="/edit/@movie.Id" class="btn btn-outline-primary me-2">Edit</a>
                     <button class="btn btn-outline-danger" @onclick="() => DeleteMovie(movie.Id)">Delete</button>
