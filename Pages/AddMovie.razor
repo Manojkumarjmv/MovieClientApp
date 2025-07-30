@@ -14,7 +14,7 @@
     <InputText @bind-value="ActorString" class="form-control mb-2" placeholder="Actors" />
     <InputTextArea @bind-value="movie.Description" class="form-control mb-2" placeholder="Description" />
     <InputDate @bind-value="movie.ReleaseDate" class="form-control mb-2" />
-    <InputText @bind-value="movie.PosterUrl" class="form-control mb-2" placeholder="Poster URL" />
+    <InputText @bind-value="movie.PosterUrl" TValue="DateTime?" class="form-control mb-2" placeholder="Poster URL" />
     <button class="btn btn-success">Add Movie</button>
 </EditForm>
 
