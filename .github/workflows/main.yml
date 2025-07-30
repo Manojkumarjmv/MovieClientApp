@@ -21,7 +21,8 @@ jobs:
 
     - name: 📥 Restore dependencies
       run: dotnet restore
-
+    - name: Display .NET SDK Version
+      run: dotnet --version
     - name: Build
       run: dotnet build --configuration Release
 
