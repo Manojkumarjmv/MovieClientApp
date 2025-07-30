@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tnO3mN3TjE4=",
+  "dgSpecHash": "2PtT3fzkIUE=",
   "success": true,
   "projectFilePath": "C:\\Users\\Anuuu\\Source\\MovieLibrary.Client\\MovieLibraryWebApp.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Anuuu\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.18\\microsoft.netcore.app.ref.8.0.18.nupkg.sha512",
-    "C:\\Users\\Anuuu\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.18\\microsoft.windowsdesktop.app.ref.8.0.18.nupkg.sha512",
-    "C:\\Users\\Anuuu\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.18\\microsoft.aspnetcore.app.ref.8.0.18.nupkg.sha512",
-    "C:\\Users\\Anuuu\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.18\\microsoft.netcore.app.host.win-x64.8.0.18.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
