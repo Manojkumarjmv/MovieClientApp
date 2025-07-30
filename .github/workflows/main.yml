@@ -20,7 +20,8 @@ jobs:
           dotnet-version: '8.0.x'
 
     - name: 📥 Restore dependencies
-      run: dotnet restore
+      run: dotnet restore --no-cache
+      
     - name: Display .NET SDK Version
       run: dotnet --version
     - name: Build
