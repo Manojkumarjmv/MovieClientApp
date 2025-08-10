@@ -1,61 +1,109 @@
 @page "/"
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 @using MovieLibrary.Client.Models
 @inject MovieLibrary.Client.Services.MovieService movieService
 
-<h3>🎬 Movie Library</h3>
-
-<input type="text" @bind="searchTerm" @bind:event="oninput" class="form-control mb-3" placeholder="Search by name, genre, actor..." />
-
+<div class="container mt-4">
 <div class="row">
-    @foreach (var movie in FilteredMovies)
-    {
-        <div class="col-md-4 mb-3">
-            <div class="card">
-                <img src="@movie.PosterUrl" class="card-img-top" alt="@movie.Name" />
-                <div class="card-body">
-                    <h5>@movie.Name</h5>
-                    <p>@movie.Description</p>
-                    <p><strong>Genre:</strong> @movie.Genre</p>
-                    <p><strong>Actors:</strong> @string.Join(", ", movie.Actors)</p>
-                    <p><strong>Released:</strong> @movie.ReleaseDate.ToShortDateString()</p>
-                    <a href="/edit/@movie.Id" class="btn btn-outline-primary me-2">Edit</a>
-                    <button class="btn btn-outline-danger" @onclick="() => DeleteMovie(movie.Id)">Delete</button>
+ <div class="col-sm-6">
+  <h3 class="mb-4 text-primary">🎬 Movie Library</h3>
+  </div>
+ <div class="col-sm-6">
+  <a href="/add" class="btn btn-sm btn-outline-primary">
+                        Add Movie <i class="bi bi-plus-circle"></i>
+                    </a>
+ </div>
+</div>
+
+   
+
+    <div class="mb-4">
+        <!-- <input type="text" @bind="searchTerm" @oninput="HandleSearchInput"
+               class="form-control form-control-lg"
+               placeholder="Search by name, genre, actor..." /> -->
+
+         <input type="text" @bind="searchTerm" @bind:event="oninput"
+               class="form-control form-control-lg"
+               placeholder="Search by name, genre, actor..." />
+
+
+    </div>
+
+    <div class="row">
+@foreach (var movie in FilteredMovies)
+{
+    <div class="col-sm-6 col-lg-4 mb-4">
+        <div class="card h-100 border-0 shadow-lg">
+            <img src="@movie.PosterUrl" class="card-img-top rounded-top w-100" alt="@movie.Name"
+                 style="height: 100%; max-height: 200px object-fit: cover;" />
+
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-bold text-primary">@movie.Name</h5>
+                <p class="card-text text-muted small">@movie.Description</p>
+
+                <ul class="list-unstyled mb-3">
+                    <li><strong>🎬 Genre:</strong> @movie.Genre</li>
+                    <li><strong>🎭 Actors:</strong> @string.Join(", ", movie.Actors)</li>
+                    <li><strong>📅 Released:</strong> @movie.ReleaseDate.ToShortDateString()</li>
+                </ul>
+
+                <div class="mt-auto d-flex justify-content-between">
+                    <a href="/edit/@movie.Id" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <button class="btn btn-sm btn-outline-danger" @onclick="() => DeleteMovie(movie.Id)">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
                 </div>
             </div>
         </div>
-    }
+    </div>
+}
+    </div>
 </div>
 
 @code {
     private List<Movie> movies = new();
-    private string searchTerm = "";
+    public string searchTerm { get; set; } = "";
+<!-- 
+        private string _searchTerm = "";
+        public string searchTerm
+        {
+            get => _searchTerm;
+            set
+            {
+                _searchTerm = value;
+                 StateHasChanged();
+                Console.WriteLine($"Search updated: {_searchTerm}");
+            }
+        } -->
 
     protected override async Task OnInitializedAsync()
     {
         movies = await movieService.GetMoviesAsync();
-        if (movies == null)
-        {
-            movies = new List<Movie>();
-        }
-        else
-        {
-            movies = movies.OrderByDescending(m => m.ReleaseDate).ToList();
-        }
+        movies ??= new List<Movie>();
+        movies = movies.OrderByDescending(m => m.ReleaseDate).ToList();
     }
 
-     private List<Movie> FilteredMovies =>
-       string.IsNullOrWhiteSpace(searchTerm)
-        ? movies
-        : movies
-            .Where(m =>
+    private List<Movie> FilteredMovies =>
+        string.IsNullOrWhiteSpace(searchTerm)
+            ? movies
+            : movies.Where(m =>
                 m.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                 m.Genre.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                 m.Actors.Any(actor => actor.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
-            .ToList(); 
+            .ToList();
+
     private async Task DeleteMovie(Guid id)
     {
-        await Http.DeleteAsync($"api/movies/{id}");
+        Console.WriteLine($"Deleting movie with ID: {id}"); 
+        await movieService.DeleteMovieAsync(id);
         movies = movies.Where(m => m.Id != id).ToList();
+    }
+    private void AddMovie(Movie movie)
+    {
+        Console.WriteLine("Navigating to Add Movie page");
+        NavigationManager.NavigateTo("/add");
     }
 }

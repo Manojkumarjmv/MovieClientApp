@@ -1,6 +1,7 @@
 @page "/edit/{Id:guid}"
 @inject HttpClient Http
 @inject NavigationManager Navigation
+@inject MovieLibrary.Client.Services.MovieService movieService
 @using MovieLibrary.Client.Models
 @using Microsoft.AspNetCore.Components.Forms
 @code {
@@ -9,12 +10,18 @@
 
     protected override async Task OnInitializedAsync()
     {
-        movie = await Http.GetFromJsonAsync<Movie>($"api/movies/{Id}");
+        movie = await movieService.GetMovieByIdAsync(Id);
     }
 
     private async Task UpdateMovie()
     {
-        await Http.PutAsJsonAsync($"api/movies/{Id}", movie);
+        Console.WriteLine($"Updating movie with ID: {Id}");
+        if (movie is null)
+        {
+            Console.WriteLine("Movie not found.");
+            return;
+        }
+        await movieService.UpdateMovieAsync(Id,movie);
         Navigation.NavigateTo("/");
     }
 }
@@ -26,7 +33,7 @@
 else
 {
     <h3>Edit Movie</h3>
-    <EditForm Model="@movie" OnValidSubmit="UpdateMovie">
+    <EditForm Model="@movie" OnValidSubmit="@UpdateMovie">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <InputText @bind-Value="movie.Name" class="form-control mb-2" />

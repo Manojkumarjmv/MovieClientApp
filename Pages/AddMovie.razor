@@ -2,11 +2,12 @@
 @inject HttpClient Http
 @inject NavigationManager Navigation
 @using MovieLibrary.Client.Models
+@inject MovieLibrary.Client.Services.MovieService movieService
 @using Microsoft.AspNetCore.Components.Forms
 
 <h3>Add Movie</h3>
 
-<EditForm Model="@movie" OnValidSubmit="@HandleAddMovie">
+<EditForm Model="@movie" OnSubmit="@HandleAddMovie">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <InputText @bind-value="movie.Name" class="form-control mb-2" placeholder="Movie Name" />
@@ -23,7 +24,8 @@
 
     private async Task HandleAddMovie()
     {
-        await Http.PostAsJsonAsync("api/movies", movie);
+        Console.WriteLine("Form submitted!");
+        await movieService.AddMovieAsync(movie);
         Navigation.NavigateTo("/");
     }
 }

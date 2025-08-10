@@ -43,6 +43,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.14.2, )"
+            },
+            "Microsoft.Azure.AppConfiguration.AspNetCore": {
+              "target": "Package",
+              "version": "[8.3.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

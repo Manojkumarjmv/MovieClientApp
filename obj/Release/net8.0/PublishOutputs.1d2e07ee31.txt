@@ -1,0 +1,13 @@
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\MovieLibraryWebApp.exe
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\publish\web.config
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\appsettings.Development.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\appsettings.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\publish\appsettings.Development.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\publish\appsettings.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\publish\MovieLibraryWebApp.deps.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\publish\MovieLibraryWebApp.runtimeconfig.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\publish\MovieLibraryWebApp.staticwebassets.endpoints.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\MovieLibraryWebApp.dll
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\MovieLibraryWebApp.deps.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\MovieLibraryWebApp.runtimeconfig.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\publish\MovieLibraryWebApp.pdb

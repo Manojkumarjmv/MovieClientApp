@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MovieLibraryWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+349b734aebc8a14c2113afd4cd48fa96f62ff1b5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+845a928fbef5d2cb7e7f03382ddbd8c2fc0cc523")]
 [assembly: System.Reflection.AssemblyProductAttribute("MovieLibraryWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MovieLibraryWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

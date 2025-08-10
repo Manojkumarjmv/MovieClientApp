@@ -1,0 +1,7 @@
+C:\Users\Anuuu\Source\MovieLibrary.Client\bin\Publish\MovieLibraryWebApp.exe
+C:\Users\Anuuu\Source\MovieLibrary.Client\bin\Publish\appsettings.Development.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\bin\Publish\appsettings.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\bin\Publish\MovieLibraryWebApp.dll
+C:\Users\Anuuu\Source\MovieLibrary.Client\bin\Publish\MovieLibraryWebApp.deps.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\bin\Publish\MovieLibraryWebApp.runtimeconfig.json
+C:\Users\Anuuu\Source\MovieLibrary.Client\bin\Publish\MovieLibraryWebApp.pdb
